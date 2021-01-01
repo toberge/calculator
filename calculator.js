@@ -7,6 +7,7 @@ const OperatorTypes = Object.freeze({
 const makeFunction = fn => ({
   precedence: 6,
   type: OperatorTypes.UNARY,
+  leftAssociative: true,
   apply: fn
 })
 
@@ -14,40 +15,60 @@ const operators = {
   '+': {
     precedence: 1,
     type: OperatorTypes.BINARY,
+    leftAssociative: true,
     apply: (y, x) => x + y
   },
   '-': {
     precedence: 1,
     type: OperatorTypes.BINARY,
+    leftAssociative: true,
     apply: (y, x) => x - y
   },
   '*': {
     precedence: 2,
     type: OperatorTypes.BINARY,
+    leftAssociative: true,
     apply: (y, x) => x * y
   },
   'x': { // Alias for *
     precedence: 2,
     type: OperatorTypes.BINARY,
+    leftAssociative: true,
     apply: (y, x) => x * y
   },
   '/': {
     precedence: 2,
     type: OperatorTypes.BINARY,
+    leftAssociative: true,
     apply: (y, x) => x / y
+  },
+  '%': {
+    precedence: 2,
+    type: OperatorTypes.BINARY,
+    leftAssociative: true,
+    apply: (y, x) => x % y
+  },
+  'mod': { // Alias for %
+    precedence: 2,
+    type: OperatorTypes.BINARY,
+    leftAssociative: true,
+    apply: (y, x) => x % y
   },
   '^': {
     precedence: 3,
     type: OperatorTypes.BINARY,
+    leftAssociative: false, // !!!
     apply: (y, x) => Math.pow(x, y)
   },
   '~': {
     precedence: 5,
     type: OperatorTypes.UNARY,
+    leftAssociative: true,
     apply: x => -x
   },
   'ln': makeFunction(Math.log),
   'log': makeFunction(Math.log10),
+  'log2': makeFunction(Math.log2),
   'sin': makeFunction(Math.sin),
   'sinh': makeFunction(Math.sinh),
   'asin': makeFunction(Math.asin),
@@ -80,7 +101,6 @@ const lex = string => {
  * @return {[number | string]} List of output tokens
  */
 const infixToRPN = tokens => {
-  console.log(tokens);
   const stack = [];
   const output = [];
   let last = '';
@@ -95,9 +115,9 @@ const infixToRPN = tokens => {
       stack.push('~');
     } else if (token in operators) { // An operator!
       const precedence = operators[token].precedence;
-      while (stack.length > 0 &&
-        (stack[stack.length - 1] !== '(' &&
-          operators[stack[stack.length - 1]].precedence >= precedence))
+      while (stack.length > 0 && stack[stack.length - 1] !== '(' &&
+        (operators[stack[stack.length - 1]].precedence > precedence ||
+        (operators[stack[stack.length - 1]].precedence = precedence && operators[token].leftAssociative)))
         output.push(stack.pop());
       stack.push(token);
     } else if (token === '(') { // Start of paren!
