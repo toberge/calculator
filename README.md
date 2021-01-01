@@ -17,7 +17,7 @@ which can be evaluated quite easily.
 
 ## Features
 
-+ The usual set of binary operators: `+`, `-`, `*`, `/`, `^`
++ The usual set of binary operators: `+`, `-`, `*`, `/`, `%`, `^`
 + Unary minus (it has some edge cases)
 + Functions – `sin`, `cos`, `log`, `ln` and some more
 + Constants – just `pi` and `e` for the time being
