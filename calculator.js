@@ -70,21 +70,22 @@ const constants = {
  * @return {[string]} List of tokens
  */
 const lex = string => {
-  return string.toLowerCase().match(/[+\-*/^()]|\d+([.,]\d+)?([eE][+-]?\d+)?|\w+/g);
+  return string.toLowerCase().match(/\d+([.,]\d+)?([eE][+-]?\d+)?|\w+|[^\s]/g);
 };
 
 /**
  * Translate an infix expression to an RPN expression
  *
- * @param expression
+ * @param tokens
  * @return {[number | string]} List of output tokens
  */
-const infixToRPN = expression => {
+const infixToRPN = tokens => {
+  console.log(tokens);
   const stack = [];
   const output = [];
   let last = '';
 
-  for (const token of expression) {
+  for (const token of tokens) {
     if (!isNaN(token)) { // A number!
       output.push(parseFloat(token));
     } else if (token in constants) {
@@ -107,7 +108,7 @@ const infixToRPN = expression => {
       if (stack[stack.length-1] === '(')
         stack.pop();
     } else {
-      throw new Error(`Unknown operator or function: ${token}`);
+      throw new Error(`Unknown ${token.length === 1 ? 'operator' : 'function'}: ${token}`);
     }
     last = token;
   }
@@ -132,16 +133,18 @@ const evaluateRPN = expression => {
     } else if (token in operators) { // An operator!
       if (operators[token].type === OperatorTypes.BINARY) {
         if (stack.length < 2) // Are there two operands left?
-          throw new Error('Too few operands!');
+          throw new Error('Too few operands');
         stack.push(operators[token].apply(stack.pop(), stack.pop()));
       } else { // Unary operator, one argument
         if (stack.length < 1) // Are there any operands left?
-          throw new Error('Too few operands!');
+          throw new Error('Too few operands');
         stack.push(operators[token].apply(stack.pop()));
       }
     }
   }
 
+  if (stack.length > 1)
+    throw new Error('Too few operators');
   return stack.pop();
 }
 
