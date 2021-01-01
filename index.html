@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Calculate!</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+
+<body>
+<header>
+    <h1>Do some calculations!</h1>
+    <p>Type something and press Enter</p>
+</header>
+<main>
+    <form id="form" autocomplete="off">
+        <label for="expression">Your expression:</label>
+        <input type="text" name="expression" id="expression"
+               size="24"
+               placeholder="Type something here">
+        <code id="result">Your result appears here</code>
+        <!--<button type="submit">Calculate!</button>-->
+    </form>
+    <details>
+        <summary>Allowed expressions</summary>
+        <div class="details-content">
+            <dl>
+                <dt>+</dt>
+                <dd><code>3 + 2 = 5</code></dd>
+                <dt>-</dt>
+                <dd><code>3 - 2 = 1</code></dd>
+                <dt>*</dt>
+                <dd><code>2 * 3 = 2 + 2 + 2</code></dd>
+                <dt>^</dt>
+                <dd><code>2 ^ 3 = 2 * 2 * 2</code></dd>
+                <dt>/</dt>
+                <dd><code>4 / 2 = 2</code></dd>
+                <dt>()</dt>
+                <dd><code>2 * (2 + 3) = 2*2 + 2*3</code></dd>
+                <dt>pi</dt>
+                <dd><code>pi = 3.141592653589793</code></dd>
+                <dt>e</dt>
+                <dd><code>e = 2.718281828459045</code></dd>
+                <dt>ln</dt>
+                <dd><code>ln(e) = 1</code></dd>
+                <dt>log</dt>
+                <dd><code>log(10) = 1</code></dd>
+                <dt>sin</dt>
+                <dd><code>sin(pi/2) = 1</code></dd>
+                <dt>cos</dt>
+                <dd><code>sin(pi*2) = 1</code></dd>
+            </dl>
+            Numbers written like <code>2.34e-8</code>,<br>
+            and some other functions like<br>
+            <em>asin</em>, <em>acos</em>, <em>sinh</em> etc.
+        </div>
+    </details>
+</main>
+<footer>
+    <p>Made by <a href="https://github.com/toberge/">me</a>, I guess.
+        Change theme? <button type="button" id="theme">Yes, please</button></p>
+</footer>
+<script type="module" src="calculator.js" defer></script>
+<script type="module" src="index.js" defer></script>
+</body>
+
+</html>

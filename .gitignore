@@ -1,0 +1,3 @@
+# Just ignore all of IntelliJ
+.idea
+*.iml

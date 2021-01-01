@@ -1,0 +1,166 @@
+/* Basic reset */
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+header,
+footer {
+  text-align: center;
+}
+
+/* Flex layout */
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Default color scheme */
+
+:root {
+  --bg-color: white;
+  --fg-color: black;
+  --link-color: blue;
+  --button-color: lightgrey;
+}
+
+body,
+input {
+  background-color: var(--bg-color);
+  color: var(--fg-color);
+}
+
+/* Generic component styling */
+
+* {
+  font-family: "Fira Sans", sans-serif;
+}
+
+input[type="text"],
+code {
+  font-family: "Fira Code", monospace;
+}
+
+code {
+  font-size: 1rem;
+}
+
+p,
+label,
+summary {
+  font-size: 1.2rem;
+}
+
+a, a:visited {
+  color: var(--link-color);
+}
+
+button {
+  border: none;
+  border-radius: 0.3rem;
+  padding: 0.35rem 0.55rem;
+
+  background-color: var(--button-color);
+  color: var(--fg-color);
+}
+
+/* Focus styling, for accessibility */
+
+button:focus {
+  outline: none;
+  border: solid var(--fg-color) 0.05rem;
+  padding: 0.3rem 0.5rem;
+}
+
+input[type="text"] {
+  padding: 0.05rem 0.05rem 0rem 0.05rem;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  padding: 0;
+  border-top: solid var(--fg-color) 0.05rem;
+  border-left: solid var(--fg-color) 0.05rem;
+  border-right: solid var(--fg-color) 0.05rem;
+}
+
+
+/* Details box styling */
+/* Adapted from https://stackoverflow.com/a/21261303 */
+
+summary {
+  cursor: pointer;
+  text-align: center;
+}
+
+.details-content dt {
+  font-weight: bold;
+  display: inline-block;
+  min-width: 2.5rem;
+}
+
+.details-content dd {
+  display: inline;
+  margin: 0;
+}
+
+.details-content dd:after {
+  display: block;
+  content: '';
+  margin-bottom: 0.2rem;
+}
+
+/* From https://codepen.io/morewry/pen/gbJvy */
+
+details[open] .details-content {
+  animation-name: grow, fadeIn;
+  animation-duration: 300ms, 200ms;
+  animation-delay: 0ms, 300ms;
+}
+
+@keyframes grow {
+  from { font-size: 0; opacity: 0; }
+  to   { font-size: 1rem; opacity: 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Form styling */
+
+input {
+  font-size: 3rem;
+  text-align: center;
+  border: none;
+  border-bottom: solid 0.2rem var(--fg-color);
+}
+
+input {
+  margin: 1rem auto;
+}
+
+#result {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
