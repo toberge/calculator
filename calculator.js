@@ -40,7 +40,10 @@ const operators = {
     precedence: 2,
     type: OperatorTypes.BINARY,
     leftAssociative: true,
-    apply: (y, x) => x / y
+    apply: (y, x) => {
+      if (y === 0) throw new Error('Division by zero is undefined');
+      return x / y;
+    }
   },
   '%': {
     precedence: 2,
